@@ -62,6 +62,20 @@ type CV struct {
 		Date        string `yaml:"date"`
 		Description string `yaml:"description"`
 	} `yaml:"hackathons"`
+	Talks []struct {
+		Title       string `yaml:"title"`
+		Coautors    string `yaml:"coautors"`
+		Conference  string `yaml:"conference"`
+		Date        string `yaml:"date"`
+		Description string `yaml:"description"`
+	} `yaml:"talks"`
+	Publications []struct {
+		Title       string `yaml:"title"`
+		Coautors    string `yaml:"coautors"`
+		Context     string `yaml:"context"`
+		Date        string `yaml:"date"`
+		Description string `yaml:"description"`
+	} `yaml:"publications"`
 	Certificates []struct {
 		Type string `yaml:"type"`
 		Name string `yaml:"name"`
