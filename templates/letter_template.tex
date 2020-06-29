@@ -1,0 +1,14 @@
+\recipient{ {{.Recipient.Name}} }{ {{.Recipient.Company}}\\123 somestreet\\some city}
+\date{ {{.Letter.Date}} }
+\opening{ {{.Letter.Opening}} }
+\closing{ {{.Letter.Closing}} }
+\enclosure[Attached]{CV, certificates}          %use an optional argument to use a string other than "Enclosure", or redefine \enclname
+\makelettertitle
+
+{{range .Letter.Text}} {{.}}
+
+{{end}}
+
+\makeletterclosing
+
+\clearpage
