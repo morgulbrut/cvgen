@@ -1,7 +1,7 @@
 settings:
   date: \today
-  cvstyle: banking # casual, classic, oldstyle, banking, fancy
-  cvcolor: burgundy # black, blue, green, grey, orange, burgundy, purplem, red
+  cvstyle: fancy # casual, classic, oldstyle, banking, fancy
+  cvcolor: blue # black, blue, green, grey, orange, burgundy, purplem, red
   mainfont:
   sansfont:
   letter: output/letter
@@ -21,6 +21,7 @@ personalinfo:
   linkedin: joedeo # optional
   twitter: jodoe # optional
   github: morgulbrut/cvgen # optional
+  gitlab: joedoe # optional
   quote: random internet guy # optional
   photo: # optional
   title: Resume # optional
@@ -63,15 +64,22 @@ hackathons:
     description: Designing the badge
 
 talks:
-  - title: Hack LS
-    coautors: Sah
-    conference: Los Santos
+  - title: Hack the Hack LS badge
+    coautors: Foo Bar
+    conference: Hack LS
     date: 2020
-    description: Designing the badge
+    description: What to do with that piece of PCB?
 
-# certificates:
-#  - Type:
-#    Name:
+publications:
+  - title: Hack the Hack LS badge
+    coautors: Foo Bar
+    context: Blogpost # Paper/Article/Blogpost
+    date: 2020
+    description: What to do with that piece of PCB?
+
+certificates:
+  - Type: Cisco
+    Name: CCT, CyberOps Associate, CyberOps Professional
 
 interests:
   - group: Hardware hacking
