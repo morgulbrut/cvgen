@@ -1,0 +1,7 @@
+*.aux
+*.log
+*.out
+*.pdf
+*/__latexindent_temp.tex
+output/*
+input/tillo1.yaml
