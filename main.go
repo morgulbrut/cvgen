@@ -2,10 +2,10 @@ package main
 
 import (
 	"flag"
-	"html/template"
 	"log"
 	"os"
 	"strings"
+	"text/template"
 
 	"github.com/morgulbrut/color256"
 	"github.com/morgulbrut/cvgen/cv"
@@ -15,7 +15,6 @@ func executeCv(data string, f *os.File, t *template.Template) {
 	var d cv.CV
 	d.Read(data)
 	color256.PrintBgHiYellow("%v", d)
-
 	err := t.Execute(f, d)
 	if err != nil {
 		log.Print("execute: ", err)
@@ -27,7 +26,6 @@ func executeLetter(data string, f *os.File, t *template.Template) {
 	var d cv.Letter
 	d.Read(data)
 	color256.PrintBgHiYellow("%v", d)
-
 	err := t.Execute(f, d)
 	if err != nil {
 		log.Print("execute: ", err)
