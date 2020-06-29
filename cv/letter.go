@@ -16,11 +16,13 @@ type Letter struct {
 		Postcode string `yaml:"postcode"`
 		City     string `yaml:"city"`
 		Country  string `yaml:"country"`
-		Opening  string `yaml:"opening"`
-		Closing  string `yaml:"closing"`
-		Letter   string `yaml:"letter"`
 	} `yaml:"recipient"`
-	Text []string `yaml:"text"`
+	Letter struct {
+		Opening string   `yaml:"opening"`
+		Closing string   `yaml:"closing"`
+		Text    []string `yaml:"text"`
+		Date    string   `yaml:"date"`
+	} `yaml:"letter"`
 }
 
 func (l *Letter) Read(f string) *Letter {
