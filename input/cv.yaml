@@ -1,0 +1,80 @@
+settings:
+  date: \today
+  cvstyle: banking # casual, classic, oldstyle, banking, fancy
+  cvcolor: burgundy # black, blue, green, grey, orange, burgundy, purplem, red
+  mainfont:
+  sansfont:
+  letter: output/letter
+
+personalinfo:
+  prename: Joe
+  name: Doe
+  address: street
+  postcode: postcode
+  city: city
+  country: country # optional
+  mobile: mobile # optional
+  phone: phone # optional
+  fax: fax # optional
+  email: joe@joedoe.com # optional
+  homepage: joedoe.com # optional
+  linkedin: joedeo # optional
+  twitter: jodoe # optional
+  github: morgulbrut/cvgen # optional
+  quote: random internet guy # optional
+  photo: # optional
+  title: Resume # optional
+
+experience:
+  - company: Awesome company
+    role: Electronics Engineer
+    city: Los Santos
+    date: Jan. 2020 -- now
+    description: Electronics stuff
+    tasks:
+      - PCB design in Altium,
+      - Building prototypes
+      - Hacking the coffee machine
+
+education:
+  - school: University Los Santos
+    subject: Electronics Engineer
+    city: Los Santos
+    date: 2006 -- 2010
+    description:
+
+languages:
+  - language: English
+    level: Mother tongue
+
+computerskills:
+  - group: EDAs
+    skill: KiCAD, Altium Designer
+  - group: Programming languages
+    skill: Python, go, some C/C++, some Java
+  - group: Other
+    skill: \LaTeX
+
+hackathons:
+  - name: Hack LS
+    role: Badge team
+    city: Los Santos
+    date: 2020
+    description: Designing the badge
+
+talks:
+  - title: Hack LS
+    coautors: Sah
+    conference: Los Santos
+    date: 2020
+    description: Designing the badge
+
+# certificates:
+#  - Type:
+#    Name:
+
+interests:
+  - group: Hardware hacking
+    description: DIY sythns, \#badgelive
+  - group: Sports
+    description: Fitness, MTB
