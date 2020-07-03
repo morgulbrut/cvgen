@@ -11,7 +11,6 @@ type Letter struct {
 	Recipient struct {
 		Name     string `yaml:"name"`
 		Company  string `yaml:"company"`
-		Prename  string `yaml:"prename"`
 		Address  string `yaml:"address"`
 		Postcode string `yaml:"postcode"`
 		City     string `yaml:"city"`
