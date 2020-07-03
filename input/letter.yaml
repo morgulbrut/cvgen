@@ -1,10 +1,10 @@
 recipient:
   name: Company Recruitment team
   company: Company, Inc
-  prename:
-  address:
-  postcode:
-  city:
+  address: Some Road 111
+  postcode: 1337
+  city: Blatown
+  country: US and A
 
 letter:
   date: \today
