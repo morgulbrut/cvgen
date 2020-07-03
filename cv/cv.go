@@ -44,6 +44,14 @@ type CV struct {
 		Description string   `yaml:"description"`
 		Tasks       []string `yaml:"tasks"`
 	} `yaml:"experience"`
+	Projects []struct {
+		Title       string   `yaml:"title"`
+		Context     string   `yaml:"context"`
+		City        string   `yaml:"city"`
+		Date        string   `yaml:"date"`
+		Description string   `yaml:"description"`
+		Tasks       []string `yaml:"tasks"`
+	} `yaml:"projects"`
 	Education []struct {
 		School      string `yaml:"school"`
 		Subject     string `yaml:"subject"`
@@ -55,6 +63,14 @@ type CV struct {
 		Group string `yaml:"group"`
 		Skill string `yaml:"skill"`
 	} `yaml:"computerskills"`
+	Testimonials []struct {
+		Name  string `yaml:"name"`
+		Quote string `yaml:"quote"`
+	} `yaml:"testimonials"`
+	Freetext struct {
+		Begin string `yaml:"begin"`
+		Enf   string `yaml:"end"`
+	} `yaml:"freetext"`
 	Hackathons []struct {
 		Name        string `yaml:"name"`
 		Role        string `yaml:"role"`
