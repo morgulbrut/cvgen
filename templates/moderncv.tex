@@ -5,8 +5,14 @@
 \usepackage[default]{raleway}
 \usepackage{fontawesome}
 \usepackage[scale=0.8]{geometry}
+\usepackage[ngerman]{babel}
 
+\newcommand{\chapquote}[2]{\begin{quotation} \enquote{\textit{#1}} \end{quotation} \begin{flushright} - #2\end{flushright} }
+% Configure page margins with geometry
+\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
 
+% Specify the location of the included fonts
+%\fontdir[fonts/]
 
 \name{ {{- .Personalinfo.Prename -}} }{ {{- .Personalinfo.Name -}} }
 \address{ {{- .Personalinfo.Address -}} }{ {{- .Personalinfo.Postcode}} {{.Personalinfo.City -}} }{{if .Personalinfo.Country}}{ {{- .Personalinfo.Country -}} }{{end}}
@@ -39,6 +45,14 @@
 
 \makecvtitle
 
+{{if .Freetext.Begin}}\section{About me}
+{{- .Freetext.Begin -}}
+\\~\\
+{{if .Testimonials}}
+{{range .Testimonials}}\chapquote{ {{- .Quote -}} }{ {{- .Name -}} }
+{{end}}{{end}}{{end}}
+
+
 {{if .Experience}}\section{Experience}
 {{range .Experience}}\cventry{ {{- .Date -}} }{ {{- .Role -}} }{ {{- .Company -}} }{ {{- .City -}} }{}
 { {{- .Description}} 
@@ -50,6 +64,15 @@
 
 {{if .Education}}\section{Education}
 {{range .Education}}\cventry{ {{- .Date -}} }{ {{- .Subject -}} }{ {{- .School -}} }{ {{- .City -}} }{}{ {{- .Description -}} }
+{{end}}{{end}}
+
+{{if .Projects}}\section{Projects}
+{{range .Projects}}\cventry{ {{- .Date -}} }{ {{- .Title -}} }{ {{- .Context -}} }{ {{- .City -}} }{}
+{ {{- .Description}} 
+  {{if .Tasks}}\begin{itemize}
+    {{range .Tasks}} \item {{.}}
+    {{end}}\end{itemize}
+  {{end -}} }
 {{end}}{{end}}
 
 {{if .Hackathons}}\section{Hackathons}

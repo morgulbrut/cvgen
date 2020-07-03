@@ -1,4 +1,4 @@
-\recipient{ {{- .Recipient.Name -}} }{ {{- .Recipient.Company -}}\\123 somestreet\\some city}
+\recipient{ {{- .Recipient.Name -}} }{ {{- .Recipient.Company -}}\\{{- .Recipient.Address -}}\\{{- .Recipient.Postcode}} {{.Recipient.City -}} {{if .Recipient.Country}}\\{{- .Recipient.Country -}}{{end}}}
 \date{ {{- .Letter.Date -}} }
 \opening{ {{- .Letter.Opening -}} }
 \closing{ {{- .Letter.Closing -}} }
@@ -10,3 +10,6 @@
 \makeletterclosing
 
 \clearpage
+
+
+%
