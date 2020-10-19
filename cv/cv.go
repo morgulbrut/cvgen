@@ -16,6 +16,23 @@ type CV struct {
 		Sansfont string `yaml:"sansfont"`
 		Letter   string `yaml:"letter"`
 	} `yaml:"settings"`
+
+	Recipient struct {
+		Name     string `yaml:"name"`
+		Company  string `yaml:"company"`
+		Prename  string `yaml:"prename"`
+		Address  string `yaml:"address"`
+		Postcode string `yaml:"postcode"`
+		City     string `yaml:"city"`
+		Country  string `yaml:"country"`
+	} `yaml:"recipient"`
+	Letter struct {
+		Opening string   `yaml:"opening"`
+		Closing string   `yaml:"closing"`
+		Text    []string `yaml:"text"`
+		Date    string   `yaml:"date"`
+	} `yaml:"letter"`
+
 	Personalinfo struct {
 		Name     string `yaml:"name"`
 		Prename  string `yaml:"prename"`

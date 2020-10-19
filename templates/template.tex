@@ -7,7 +7,6 @@
 \usepackage[scale=0.8]{geometry}
 
 
-
 \name{ {{- .Personalinfo.Prename -}} }{ {{- .Personalinfo.Name -}} }
 \address{ {{- .Personalinfo.Address -}} }{ {{- .Personalinfo.Postcode}} {{.Personalinfo.City -}} }{{if .Personalinfo.Country}}{ {{- .Personalinfo.Country -}} }{{end}}
 {{if .Personalinfo.Mobile}}\phone[mobile]{ {{- .Personalinfo.Mobile -}} }{{end}}
@@ -35,7 +34,28 @@
 %----------------------------------------------------------------------------------
 \begin{document}
 
-{{if .Settings.Letter}}\include{ {{- .Settings.Letter -}} }{{end}}
+%----------------------------------------------------------------------------------
+%            Letter
+%----------------------------------------------------------------------------------
+{{if .Letter}}
+\recipient{ {{- .Recipient.Name -}} }{ {{- .Recipient.Company -}}\\{{- .Recipient.Company -}}\\some city}
+\date{ {{- .Letter.Date -}} }
+\opening{ {{- .Letter.Opening -}} }
+\closing{ {{- .Letter.Closing -}} }
+\enclosure[Attached]{CV, certificates}          %use an optional argument to use a string other than "Enclosure", or redefine \enclname
+\makelettertitle
+{{range .Letter.Text}}
+{{.}}
+{{end}}
+\makeletterclosing
+
+\pagebreak
+
+{{end}}
+
+%----------------------------------------------------------------------------------
+%            CV 
+%----------------------------------------------------------------------------------
 
 \makecvtitle
 
