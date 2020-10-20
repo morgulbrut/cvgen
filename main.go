@@ -5,7 +5,6 @@ import (
 	"log"
 	"os"
 	"os/exec"
-	"strings"
 	"text/template"
 
 	"github.com/morgulbrut/color256"
@@ -22,15 +21,15 @@ func executeCv(data string, f *os.File, t *template.Template) {
 	}
 }
 
-func executeLetter(data string, f *os.File, t *template.Template) {
-	var d cv.Letter
-	d.Read(data)
-	err := t.Execute(f, d)
-	if err != nil {
-		log.Print("execute: ", err)
-		return
-	}
-}
+// func executeLetter(data string, f *os.File, t *template.Template) {
+// 	var d cv.Letter
+// 	d.Read(data)
+// 	err := t.Execute(f, d)
+// 	if err != nil {
+// 		log.Print("execute: ", err)
+// 		return
+// 	}
+// }
 
 func output(data, templ, out string) {
 	os.Remove(out)
@@ -47,12 +46,8 @@ func output(data, templ, out string) {
 		log.Println("create file: ", err)
 		return
 	}
+	executeCv(data, f, t)
 
-	if strings.Contains(out, "letter.tex") {
-		executeLetter(data, f, t)
-	} else {
-		executeCv(data, f, t)
-	}
 	f.Close()
 }
 
@@ -81,7 +76,6 @@ func cleanup() {
 	remFile("cv.aux")
 	remFile("cv.log")
 	remFile("cv.out")
-	remFile("output/letter.aux")
 }
 
 func remFile(path string) {

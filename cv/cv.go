@@ -14,7 +14,6 @@ type CV struct {
 		Cvcolor  string `yaml:"cvcolor"`
 		Mainfont string `yaml:"mainfont"`
 		Sansfont string `yaml:"sansfont"`
-		Letter   string `yaml:"letter"`
 	} `yaml:"settings"`
 
 	Recipient struct {
