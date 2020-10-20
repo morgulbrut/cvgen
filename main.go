@@ -4,6 +4,7 @@ import (
 	"flag"
 	"log"
 	"os"
+	"os/exec"
 	"strings"
 	"text/template"
 
@@ -34,7 +35,7 @@ func executeLetter(data string, f *os.File, t *template.Template) {
 func output(data, templ, out string) {
 	os.Remove(out)
 
-	color256.PrintBgHiCyan("Rendering output(%s, %s, %s)", data, templ, out)
+	color256.PrintHiCyan("Rendering output(%s, %s, %s)", data, templ, out)
 	t, err := template.ParseFiles(templ)
 	if err != nil {
 		log.Print(err)
@@ -67,17 +68,44 @@ func logo() {
 	color256.PrintRandom(" CV Generator                     ╚═╝         ")
 }
 
+func runcmd(cmd string, file string) {
+	c := exec.Command(cmd, file)
+	st, err := c.Output()
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println(string(st))
+}
+
+func cleanup() {
+	remFile("cv.aux")
+	remFile("cv.log")
+	remFile("cv.out")
+	remFile("output/letter.aux")
+}
+
+func remFile(path string) {
+	err := os.Remove(path)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+}
+
 func main() {
 	logo()
 	var templ, data, out string
-	var letter bool
+	var letter, pdfl, xel bool
 	var ltempl, ldata string
 	flag.StringVar(&templ, "t", "templates/moderncv.tex", "Path to cv template")
 	flag.StringVar(&data, "i", "input/cv.yaml", "Path to cv data yaml file")
 	flag.StringVar(&out, "o", "output/cv.tex", "Path to output file")
 	flag.BoolVar(&letter, "L", false, "Compile a cover letter, the template should have it enabled too")
-	flag.StringVar(&ltempl, "c", "templates/moderncv_letter.tex", "Path to letter template")
-	flag.StringVar(&ldata, "l", "input/letter.yaml", "Path to lette data yaml file")
+	flag.StringVar(&ltempl, "c", "templates/letter_template.tex", "Path to letter template")
+	flag.StringVar(&ldata, "l", "input/letter.yaml", "Path to letter data yaml file")
+	flag.BoolVar(&pdfl, "P", false, "Genderate a pdf using pdflatex")
+	flag.BoolVar(&xel, "X", false, "Genderate a pdf using xelatex")
+
 	flag.Parse()
 
 	if letter {
@@ -85,6 +113,12 @@ func main() {
 	}
 	output(data, templ, out)
 
-	color256.PrintHiOrange("Run:")
-	color256.PrintHiGreen("xelatex -interaction=nonstopmode %s", out)
+	if pdfl {
+		runcmd("pdflatex", out)
+		cleanup()
+	}
+	if xel {
+		runcmd("xelatex", out)
+		cleanup()
+	}
 }
