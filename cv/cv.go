@@ -85,7 +85,7 @@ type CV struct {
 	} `yaml:"testimonials"`
 	Freetext struct {
 		Begin string `yaml:"begin"`
-		Enf   string `yaml:"end"`
+		End   string `yaml:"end"`
 	} `yaml:"freetext"`
 	Hackathons []struct {
 		Name        string `yaml:"name"`
