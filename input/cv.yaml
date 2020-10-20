@@ -1,6 +1,6 @@
 settings:
   date: \today
-  cvstyle: fancy # casual, classic, oldstyle, banking, fancy
+  cvstyle: banking # casual, classic, oldstyle, banking, fancy
   cvcolor: blue # black, blue, green, grey, orange, burgundy, purplem, red
   mainfont:
   sansfont:
@@ -9,9 +9,9 @@ recipient:
   name: Company Recruitment team
   company: Company, Inc
   prename:
-  address:
-  postcode:
-  city:
+  address: 124 street
+  postcode: 65654
+  city: whatews
 
 letter:
   date: \today
@@ -42,6 +42,13 @@ personalinfo:
   quote: random internet guy # optional
   photo: # optional
   title: Resume # optional
+
+freetext:
+  begin: \\
+
+testimonials:
+  - name: OG Loc
+    quote: Joe Doe is a real G.
 
 experience:
   - company: Awesome company
