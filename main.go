@@ -52,7 +52,7 @@ func logo() {
 	color256.PrintRandom(" CV Generator                     ╚═╝         ")
 }
 
-func runcmd(cmd string, file string) {
+func compPDF(cmd string, file string) {
 	c := exec.Command(cmd, "--interaction=nonstopmode", file)
 	st, err := c.Output()
 	if err != nil {
@@ -94,11 +94,11 @@ func main() {
 	output(data, templ, out)
 
 	if pdfl {
-		runcmd("pdflatex", out)
+		compPDF("pdflatex", out)
 		cleanup()
 	}
 	if xel {
-		runcmd("xelatex", out)
+		compPDF("xelatex", out)
 		cleanup()
 	}
 }
