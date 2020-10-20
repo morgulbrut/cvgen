@@ -1,6 +1,6 @@
 settings:
   date: \today
-  cvstyle: banking # casual, classic, oldstyle, banking, fancy
+  cvstyle: fancy # casual, classic, oldstyle, banking, fancy
   cvcolor: blue # black, blue, green, grey, orange, burgundy, purplem, red
   mainfont:
   sansfont:
@@ -44,7 +44,8 @@ personalinfo:
   title: Resume # optional
 
 freetext:
-  begin: \\
+  begin: Yo!
+  end: That all and thanks for the fish
 
 testimonials:
   - name: OG Loc

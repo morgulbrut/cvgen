@@ -66,10 +66,11 @@
 
 {{if .Freetext.Begin}}\section{About me}
 {{- .Freetext.Begin -}}
-\\~\\
-{{if .Testimonials}}
-{{range .Testimonials}}\chapquote{ {{- .Quote -}} }{ {{- .Name -}} }
-{{end}}{{end}}{{end}}
+{{end}}
+
+{{if .Testimonials}}\section{Others about me}
+{{range .Testimonials}}\cventry{}{}{ {{- .Name -}} }{}{}{ {{- .Quote -}} }
+{{end}}{{end}}
 
 
 {{if .Experience}}\section{Experience}
@@ -121,6 +122,10 @@
 {{if .Interests}}\section{Interests}
 {{range .Interests}}\cvitem{ {{- .Group -}} }{ {{- .Description -}} }
 {{end}}{{end}}
+
+{{if .Freetext.End}}\section{Last but not least}
+{{- .Freetext.End -}}
+{{end}}
 
 \end{document}
 
