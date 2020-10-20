@@ -100,9 +100,6 @@ func main() {
 	flag.StringVar(&templ, "t", "templates/moderncv.tex", "Path to cv template")
 	flag.StringVar(&data, "i", "input/cv.yaml", "Path to cv data yaml file")
 	flag.StringVar(&out, "o", "output/cv.tex", "Path to output file")
-	flag.BoolVar(&letter, "L", false, "Compile a cover letter, the template should have it enabled too")
-	flag.StringVar(&ltempl, "c", "templates/letter_template.tex", "Path to letter template")
-	flag.StringVar(&ldata, "l", "input/letter.yaml", "Path to letter data yaml file")
 	flag.BoolVar(&pdfl, "P", false, "Genderate a pdf using pdflatex")
 	flag.BoolVar(&xel, "X", false, "Genderate a pdf using xelatex")
 
