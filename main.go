@@ -21,19 +21,8 @@ func executeCv(data string, f *os.File, t *template.Template) {
 	}
 }
 
-// func executeLetter(data string, f *os.File, t *template.Template) {
-// 	var d cv.Letter
-// 	d.Read(data)
-// 	err := t.Execute(f, d)
-// 	if err != nil {
-// 		log.Print("execute: ", err)
-// 		return
-// 	}
-// }
-
 func output(data, templ, out string) {
 	os.Remove(out)
-
 	color256.PrintHiCyan("Rendering output(%s, %s, %s)", data, templ, out)
 	t, err := template.ParseFiles(templ)
 	if err != nil {
