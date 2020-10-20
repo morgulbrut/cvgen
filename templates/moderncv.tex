@@ -44,20 +44,18 @@
 %----------------------------------------------------------------------------------
 %            Letter
 %----------------------------------------------------------------------------------
-{{if .Letter}}
-\recipient{ {{- .Recipient.Name -}} }{ {{- .Recipient.Company -}}\\{{- .Recipient.Company -}}\\some city}
-\date{ {{- .Letter.Date -}} }
-\opening{ {{- .Letter.Opening -}} }
-\closing{ {{- .Letter.Closing -}} }
-\enclosure[Attached]{CV, certificates}          %use an optional argument to use a string other than "Enclosure", or redefine \enclname
-\makelettertitle
-{{range .Letter.Text}}
-{{.}}
-{{end}}
-\makeletterclosing
-
-\pagebreak
-
+{{if .Recipient.Name}}
+  \recipient{ {{- .Recipient.Name -}} }{ {{- .Recipient.Company -}}\\{{- .Recipient.Address -}}\\{{- .Recipient.Postcode}} {{.Recipient.City -}} }
+  \date{ {{- .Letter.Date -}} }
+  \opening{ {{- .Letter.Opening -}} }
+  \closing{ {{- .Letter.Closing -}} }
+  \enclosure[Attached]{CV, certificates}          %use an optional argument to use a string other than "Enclosure", or redefine \enclname
+  \makelettertitle
+  {{range .Letter.Text}}
+    {{.}}
+  {{end}}
+  \makeletterclosing
+  \pagebreak
 {{end}}
 
 %----------------------------------------------------------------------------------
