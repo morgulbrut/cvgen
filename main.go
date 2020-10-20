@@ -94,10 +94,12 @@ func main() {
 	output(data, templ, out)
 
 	if pdfl {
+		color256.PrintHiCyan("Compiling %s using pdflatex", out)
 		compPDF("pdflatex", out)
 		cleanup()
 	}
 	if xel {
+		color256.PrintHiCyan("Compiling %s using xelatex", out)
 		compPDF("xelatex", out)
 		cleanup()
 	}
