@@ -53,7 +53,7 @@ func logo() {
 }
 
 func runcmd(cmd string, file string) {
-	c := exec.Command(cmd, file)
+	c := exec.Command(cmd, "--interaction=nonstopmode", file)
 	st, err := c.Output()
 	if err != nil {
 		log.Fatal(err)
