@@ -35,13 +35,13 @@
 	
 	% If your name is very short, use just one of the lines below
 	% If your name is very long, reduce the font size or make the minipage wider and reduce the others proportionately
-	\colorbox{black}{{\HUGE\textcolor{white}{\textbf{\MakeUppercase{Alyx}}}}} % First name
+	\colorbox{black}{{\HUGE\textcolor{white}{\textbf{\MakeUppercase{ {{- .Personalinfo.Prename -}} }}}}} % First name
 	
-	\colorbox{black}{{\HUGE\textcolor{white}{\textbf{\MakeUppercase{Vance}}}}} % Last name
+	\colorbox{black}{{\HUGE\textcolor{white}{\textbf{\MakeUppercase{ {{- .Personalinfo.Name -}} }}}}} % Last name
 	
 	\vspace{6pt}
 	
-	{\huge Web App Architect} % Career or current job title
+	{\huge {{- .Personalinfo.Title -}} } % Career or current job title
 \end{minipage}
 \begin{minipage}[t]{0.275\textwidth} % 27.5% of the page width for the first row of icons
 	\vspace{-\baselineskip} % Required for vertically aligning minipages
