@@ -65,13 +65,12 @@
 \makecvtitle
 
 {{if .Freetext.Begin}}\section{About me}
-{{- .Freetext.Begin -}}
+\cvitem{}{ {{- .Freetext.Begin -}} }
 {{end}}
 
 {{if .Testimonials}}\section{Others about me}
-{{range .Testimonials}}\cventry{}{}{ {{- .Name -}} }{}{}{ {{- .Quote -}} }
+{{range .Testimonials}}\cvitem{ {{- .Name -}} }{ {{- .Quote -}} }
 {{end}}{{end}}
-
 
 {{if .Experience}}\section{Experience}
 {{range .Experience}}\cventry{ {{- .Date -}} }{ {{- .Role -}} }{ {{- .Company -}} }{ {{- .City -}} }{}
@@ -124,7 +123,7 @@
 {{end}}{{end}}
 
 {{if .Freetext.End}}\section{Last but not least}
-{{- .Freetext.End -}}
+\cvitem{}{ {{- .Freetext.End -}} }
 {{end}}
 
 \end{document}
