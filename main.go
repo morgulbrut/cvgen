@@ -11,17 +11,10 @@ import (
 	"github.com/morgulbrut/cvgen/cv"
 )
 
-func executeCv(data string, f *os.File, t *template.Template) {
+func output(data, templ, out string) {
 	var d cv.CV
 	d.Read(data)
-	err := t.Execute(f, d)
-	if err != nil {
-		log.Print("execute: ", err)
-		return
-	}
-}
 
-func output(data, templ, out string) {
 	os.Remove(out)
 	color256.PrintHiCyan("Rendering output(%s, %s, %s)", data, templ, out)
 	t, err := template.ParseFiles(templ)
@@ -35,8 +28,12 @@ func output(data, templ, out string) {
 		log.Println("create file: ", err)
 		return
 	}
-	executeCv(data, f, t)
 
+	err = t.Execute(f, d)
+	if err != nil {
+		log.Println("executing template: ", err)
+		return
+	}
 	f.Close()
 }
 
