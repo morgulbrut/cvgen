@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"text/template"
 
 	"github.com/morgulbrut/color256"
@@ -17,9 +18,12 @@ func output(data, templ, out string) {
 
 	os.Remove(out)
 	color256.PrintHiCyan("Rendering output(%s, %s, %s)", data, templ, out)
-	t, err := template.ParseFiles(templ)
+
+	tn := filepath.Base(templ)
+	t, err := template.New(tn).Delims("#(", ")#").ParseFiles(templ)
+
 	if err != nil {
-		log.Print(err)
+		log.Println("generating template: ", err)
 		return
 	}
 

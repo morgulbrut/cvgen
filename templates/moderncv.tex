@@ -1,40 +1,37 @@
 \documentclass[10pt,a4paper,sans]{moderncv}        
-\moderncvstyle{ {{- .Settings.Cvstyle -}} }
-\moderncvcolor{ {{- .Settings.Cvcolor -}} }
+\moderncvstyle{ #(- .Settings.Cvstyle -)# }
+\moderncvcolor{ #(- .Settings.Cvcolor -)# }
 
 \usepackage[default]{raleway}
 \usepackage{fontawesome}
 \usepackage[scale=0.8]{geometry}
 \usepackage[ngerman]{babel}
 
-\newcommand{\chapquote}[2]{\begin{quotation} \enquote{\textit{#1}} \end{quotation} \begin{flushright} - #2\end{flushright} }
 % Configure page margins with geometry
 \geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
 
 % Specify the location of the included fonts
 %\fontdir[fonts/]
 
-\name{ {{- .Personalinfo.Prename -}} }{ {{- .Personalinfo.Name -}} }
-\address{ {{- .Personalinfo.Address -}} }{ {{- .Personalinfo.Postcode}} {{.Personalinfo.City -}} }{{if .Personalinfo.Country}}{ {{- .Personalinfo.Country -}} }{{end}}
-{{if .Personalinfo.Mobile}}\phone[mobile]{ {{- .Personalinfo.Mobile -}} }{{end}}
-{{if .Personalinfo.Phone}}\phone[fixed]{ {{- .Personalinfo.Phone  -}} }{{end}}
-{{if .Personalinfo.Fax}}\phone[fax]{ {{- .Personalinfo.Fax  -}} }{{end}}
-{{if .Personalinfo.Title}}\title{ {{- .Personalinfo.Title -}} }{{end}}
-{{if .Personalinfo.Email}}\email{ {{- .Personalinfo.Email -}} }{{end}} 
-{{if .Personalinfo.Homepage}}\homepage{ {{-  .Personalinfo.Homepage -}} }{{end}}                              
-{{if .Personalinfo.Linkedin}}\social[linkedin]{ {{- .Personalinfo.Linkedin -}} }{{end}}                              
-{{if .Personalinfo.Twitter}}\social[twitter]{ {{- .Personalinfo.Twitter -}} }{{end}}                              
-{{if .Personalinfo.Github}}\social[github]{ {{- .Personalinfo.Github -}} }{{end}}
-{{if .Personalinfo.Photo}}\photo[64pt][0.4pt]{ {{- .Personalinfo.Photo -}} }{{end}}                              
-{{if .Personalinfo.Quote}}\quote{ {{- .Personalinfo.Quote -}} }{{end}}                            
-{{if .Personalinfo.Gitlab}}
+\name{ #(- .Personalinfo.Prename -)# }{ #(- .Personalinfo.Name -)# }
+\address{ #(- .Personalinfo.Address -)# }{ #(- .Personalinfo.Postcode)# #(.Personalinfo.City -)# }#(if .Personalinfo.Country)#{ #(- .Personalinfo.Country -)# }#(end)#
+#(if .Personalinfo.Mobile)#\phone[mobile]{ #(- .Personalinfo.Mobile -)# }#(end)#
+#(if .Personalinfo.Phone)#\phone[fixed]{ #(- .Personalinfo.Phone  -)# }#(end)#
+#(if .Personalinfo.Fax)#\phone[fax]{ #(- .Personalinfo.Fax  -)# }#(end)#
+#(if .Personalinfo.Title)#\title{ #(- .Personalinfo.Title -)# }#(end)#
+#(if .Personalinfo.Email)#\email{ #(- .Personalinfo.Email -)# }#(end)# 
+#(if .Personalinfo.Homepage)#\homepage{ #(-  .Personalinfo.Homepage -)# }#(end)#                              
+#(if .Personalinfo.Linkedin)#\social[linkedin]{ #(- .Personalinfo.Linkedin -)# }#(end)#                              
+#(if .Personalinfo.Twitter)#\social[twitter]{ #(- .Personalinfo.Twitter -)# }#(end)#                              
+#(if .Personalinfo.Github)#\social[github]{ #(- .Personalinfo.Github -)# }#(end)#
+#(if .Personalinfo.Photo)#\photo[64pt][0.4pt]{ #(- .Personalinfo.Photo -)# }#(end)#                              
+#(if .Personalinfo.Quote)#\quote{ #(- .Personalinfo.Quote -)# }#(end)#                            
+#(if .Personalinfo.Gitlab)#
 \newcommand*\gitlabsocialsymbol{
   {\faGitlab~}
 }
-\social[gitlab][https://gitlab.com/{{- .Personalinfo.Gitlab -}}]{ {{- .Personalinfo.Gitlab -}} }
-{{end}}
-
-\makeatletter\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}\makeatother
+\social[gitlab][https://gitlab.com/#(- .Personalinfo.Gitlab -)#]{ #(- .Personalinfo.Gitlab -)# }
+#(end)#
 
 %----------------------------------------------------------------------------------
 %            content
@@ -44,19 +41,19 @@
 %----------------------------------------------------------------------------------
 %            Letter
 %----------------------------------------------------------------------------------
-{{if .Recipient.Name}}
-  \recipient{ {{- .Recipient.Name -}} }{ {{- .Recipient.Company -}}\\{{- .Recipient.Address -}}\\{{- .Recipient.Postcode}} {{.Recipient.City -}} }
-  \date{ {{- .Letter.Date -}} }
-  \opening{ {{- .Letter.Opening -}} }
-  \closing{ {{- .Letter.Closing -}} }
+#(if .Recipient.Name)#
+  \recipient{ #(- .Recipient.Name -)# }{ #(- .Recipient.Company -)#\\#(- .Recipient.Address -)#\\#(- .Recipient.Postcode)# #(.Recipient.City -)# }
+  \date{ #(- .Letter.Date -)# }
+  \opening{ #(- .Letter.Opening -)# }
+  \closing{ #(- .Letter.Closing -)# }
   \enclosure[Attached]{CV, certificates}          %use an optional argument to use a string other than "Enclosure", or redefine \enclname
   \makelettertitle
-  {{range .Letter.Text}}
-    {{.}}
-  {{end}}
+  #(range .Letter.Text)#
+    #(.)#
+  #(end)#
   \makeletterclosing
   \pagebreak
-{{end}}
+#(end)#
 
 %----------------------------------------------------------------------------------
 %            CV 
@@ -64,67 +61,67 @@
 
 \makecvtitle
 
-{{if .Freetext.Begin}}\section{About me}
-\cvitem{}{ {{- .Freetext.Begin -}} }
-{{end}}
+#(if .Freetext.Begin)#\section{About me}
+\cvitem{}{ #(- .Freetext.Begin -)# }
+#(end)#
 
-{{if .Testimonials}}\section{Others about me}
-{{range .Testimonials}}\cvitem{ {{- .Name -}} }{ {{- .Quote -}} }
-{{end}}{{end}}
+#(if .Testimonials)#\section{Others about me}
+#(range .Testimonials)#\cvitem{ #(- .Name -)# }{ #(- .Quote -)# }
+#(end)##(end)#
 
-{{if .Experience}}\section{Experience}
-{{range .Experience}}\cventry{ {{- .Date -}} }{ {{- .Role -}} }{ {{- .Company -}} }{ {{- .City -}} }{}
-{ {{- .Description}} 
-  {{if .Tasks}}\begin{itemize}
-    {{range .Tasks}} \item {{.}}
-    {{end}}\end{itemize}
-  {{end -}} }
-{{end}}{{end}}
+#(if .Experience)#\section{Experience}
+#(range .Experience)#\cventry{ #(- .Date -)# }{ #(- .Role -)# }{ #(- .Company -)# }{ #(- .City -)# }{}
+{ #(- .Description)# 
+  #(if .Tasks)#\begin{itemize}
+    #(range .Tasks)# \item #(.)#
+    #(end)#\end{itemize}
+  #(end -)# }
+#(end)##(end)#
 
-{{if .Education}}\section{Education}
-{{range .Education}}\cventry{ {{- .Date -}} }{ {{- .Subject -}} }{ {{- .School -}} }{ {{- .City -}} }{}{ {{- .Description -}} }
-{{end}}{{end}}
+#(if .Education)#\section{Education}
+#(range .Education)#\cventry{ #(- .Date -)# }{ #(- .Subject -)# }{ #(- .School -)# }{ #(- .City -)# }{}{ #(- .Description -)# }
+#(end)##(end)#
 
-{{if .Projects}}\section{Projects}
-{{range .Projects}}\cventry{ {{- .Date -}} }{ {{- .Title -}} }{ {{- .Context -}} }{ {{- .City -}} }{}
-{ {{- .Description}} 
-  {{if .Tasks}}\begin{itemize}
-    {{range .Tasks}} \item {{.}}
-    {{end}}\end{itemize}
-  {{end -}} }
-{{end}}{{end}}
+#(if .Projects)#\section{Projects}
+#(range .Projects)#\cventry{ #(- .Date -)# }{ #(- .Title -)# }{ #(- .Context -)# }{ #(- .City -)# }{}
+{ #(- .Description)# 
+  #(if .Tasks)#\begin{itemize}
+    #(range .Tasks)# \item #(.)#
+    #(end)#\end{itemize}
+  #(end -)# }
+#(end)##(end)#
 
-{{if .Hackathons}}\section{Hackathons}
-{{range .Hackathons}}\cventry{ {{- .Date -}} }{ {{- .Name -}} }{ {{- .Role -}} }{ {{- .City -}} }{}{ {{- .Description -}} }
-{{end}}{{end}}
+#(if .Hackathons)#\section{Hackathons}
+#(range .Hackathons)#\cventry{ #(- .Date -)# }{ #(- .Name -)# }{ #(- .Role -)# }{ #(- .City -)# }{}{ #(- .Description -)# }
+#(end)##(end)#
 
-{{if .Talks}}\section{Talks}
-{{range .Talks}}\cventry{ {{- .Date -}} }{ {{- .Title -}} }{ {{- .Coautors -}} }{ {{- .Conference -}} }{}{ {{- .Description -}} }
-{{end}}{{end}}
+#(if .Talks)#\section{Talks}
+#(range .Talks)#\cventry{ #(- .Date -)# }{ #(- .Title -)# }{ #(- .Coautors -)# }{ #(- .Conference -)# }{}{ #(- .Description -)# }
+#(end)##(end)#
 
-{{if .Publications}}\section{Publications}
-{{range .Publications}}\cventry{ {{- .Date -}} }{ {{- .Title -}} }{ {{- .Coautors -}} }{ {{- .Context -}} }{}{ {{- .Description -}} }
-{{end}}{{end}}
+#(if .Publications)#\section{Publications}
+#(range .Publications)#\cventry{ #(- .Date -)# }{ #(- .Title -)# }{ #(- .Coautors -)# }{ #(- .Context -)# }{}{ #(- .Description -)# }
+#(end)##(end)#
 
-{{if .Computerskills}}\section{Computer skills}
-{{range .Computerskills}}\cvitem{ {{- .Group -}} }{ {{- .Skill -}} }
-{{end}}{{end}}
+#(if .Computerskills)#\section{Computer skills}
+#(range .Computerskills)#\cvitem{ #(- .Group -)# }{ #(- .Skill -)# }
+#(end)##(end)#
 
-{{if .Certificates }}\section{Certificates}
-{{range .Certificates }}\cvitem{ {{- .Type -}} }{ {{- .Name -}} }
-{{end}}{{end}}
+#(if .Certificates )#\section{Certificates}
+#(range .Certificates )#\cvitem{ #(- .Type -)# }{ #(- .Name -)# }
+#(end)##(end)#
 
-{{if .Languages}}\section{Languages}
-{{range .Languages}}\cvitem{ {{- .Language -}} }{ {{- .Level -}} }
-{{end}}{{end}}
+#(if .Languages)#\section{Languages}
+#(range .Languages)#\cvitem{ #(- .Language -)# }{ #(- .Level -)# }
+#(end)##(end)#
 
-{{if .Interests}}\section{Interests}
-{{range .Interests}}\cvitem{ {{- .Group -}} }{ {{- .Description -}} }
-{{end}}{{end}}
+#(if .Interests)#\section{Interests}
+#(range .Interests)#\cvitem{ #(- .Group -)# }{ #(- .Description -)# }
+#(end)##(end)#
 
-{{if .Freetext.End}}\section{Last but not least}
-\cvitem{}{ {{- .Freetext.End -}} }
-{{end}}
+#(if .Freetext.End)#\section{Last but not least}
+\cvitem{}{ #(- .Freetext.End -)# }
+#(end)#
 
 \end{document}
 
