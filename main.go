@@ -23,19 +23,19 @@ func output(data, templ, out string) {
 	t, err := template.New(tn).Delims("#(", ")#").ParseFiles(templ)
 
 	if err != nil {
-		log.Println("generating template: ", err)
+		color256.PrintHiRed("generating template: ", err)
 		return
 	}
 
 	f, err := os.Create(out)
 	if err != nil {
-		log.Println("create file: ", err)
+		color256.PrintHiRed("creating file: ", err)
 		return
 	}
 
 	err = t.Execute(f, d)
 	if err != nil {
-		log.Println("executing template: ", err)
+		color256.PrintHiRed("executing template: ", err)
 		return
 	}
 	f.Close()
@@ -57,9 +57,9 @@ func compPDF(cmd string, file string) {
 	c := exec.Command(cmd, "--interaction=nonstopmode", file)
 	st, err := c.Output()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("compiling PDF: ", err)
 	}
-	log.Println(string(st))
+	color256.PrintHiRed(string(st))
 }
 
 func cleanup() {
@@ -71,7 +71,7 @@ func cleanup() {
 func remFile(path string) {
 	err := os.Remove(path)
 	if err != nil {
-		log.Println(err)
+		color256.PrintHiRed("Removing file: ", err)
 		return
 	}
 }
