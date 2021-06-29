@@ -7,3 +7,4 @@ output/*
 input/tillo1.yaml
 input/tillode.yaml
 *.exe
+input/tillo_simple.yaml
