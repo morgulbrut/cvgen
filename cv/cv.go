@@ -8,14 +8,6 @@ import (
 )
 
 type CV struct {
-	Settings struct {
-		Date     string `yaml:"date"`
-		Cvstyle  string `yaml:"cvstyle"`
-		Cvcolor  string `yaml:"cvcolor"`
-		Mainfont string `yaml:"mainfont"`
-		Sansfont string `yaml:"sansfont"`
-	} `yaml:"settings"`
-
 	Recipient struct {
 		Name     string `yaml:"name"`
 		Company  string `yaml:"company"`
@@ -120,6 +112,23 @@ type CV struct {
 		Language string `yaml:"language"`
 		Level    string `yaml:"level"`
 	} `yaml:"languages"`
+
+	// moderncv settings
+	Settings struct {
+		Date     string `yaml:"date"`
+		Cvstyle  string `yaml:"cvstyle"`
+		Cvcolor  string `yaml:"cvcolor"`
+		Mainfont string `yaml:"mainfont"`
+		Sansfont string `yaml:"sansfont"`
+	} `yaml:"settings"`
+
+	// developercv settings
+	Skills []struct {
+		Name  string `yaml:"name"`
+		Level string `yaml:"level"`
+	} `yaml:"skills"`
+	Hobbies   string `yaml:"hobbies"`
+	Nonprofit string `yaml:"nonprofit"`
 }
 
 func (cv *CV) Read(f string) *CV {

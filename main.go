@@ -89,6 +89,11 @@ func main() {
 
 	flag.Parse()
 
+	err := os.Setenv("TEXINPUTS", "templates")
+	if err != nil {
+		log.Fatalf("err %v", err)
+	}
+
 	if letter {
 		output(ldata, ltempl, "output/letter.tex")
 	}
