@@ -69,8 +69,8 @@
 #(range .Testimonials)#\cvitem{ #(- .Name -)# }{ #(- .Quote -)# }
 #(end)##(end)#
 
-#(if .Experience)#\section{Experience}
-#(range .Experience)#\cventry{ #(- .Date -)# }{ #(- .Role -)# }{ #(- .Company -)# }{ #(- .City -)# }{}
+#(if .Experience)#\section{ #(- .Experience.Title -)#  }
+#(range .Experience.Jobs)#\cventry{ #(- .Date -)# }{ #(- .Role -)# }{ #(- .Company -)# }{ #(- .City -)# }{}
 { #(- .Description)# 
   #(if .Tasks)#\begin{itemize}
     #(range .Tasks)# \item #(.)#
@@ -78,12 +78,12 @@
   #(end -)# }
 #(end)##(end)#
 
-#(if .Education)#\section{Education}
-#(range .Education)#\cventry{ #(- .Date -)# }{ #(- .Subject -)# }{ #(- .School -)# }{ #(- .City -)# }{}{ #(- .Description -)# }
+#(if .Education)#\section{ #(- .Education.Title -)#  }
+#(range .Education.Schools)#\cventry{ #(- .Date -)# }{ #(- .Subject -)# }{ #(- .School -)# }{ #(- .City -)# }{}{ #(- .Description -)# }
 #(end)##(end)#
 
-#(if .Projects)#\section{Projects}
-#(range .Projects)#\cventry{ #(- .Date -)# }{ #(- .Title -)# }{ #(- .Context -)# }{ #(- .City -)# }{}
+#(if .Projects)#\section{ #(- .Education.Title -)# }
+#(range .Projects.Projects)#\cventry{ #(- .Date -)# }{ #(- .Title -)# }{ #(- .Context -)# }{ #(- .City -)# }{}
 { #(- .Description)# 
   #(if .Tasks)#\begin{itemize}
     #(range .Tasks)# \item #(.)#
@@ -91,32 +91,32 @@
   #(end -)# }
 #(end)##(end)#
 
-#(if .Hackathons)#\section{Hackathons}
-#(range .Hackathons)#\cventry{ #(- .Date -)# }{ #(- .Name -)# }{ #(- .Role -)# }{ #(- .City -)# }{}{ #(- .Description -)# }
+#(if .Hackathons)#\section{ #(- .Hackathons.Title -)# }
+#(range .Hackathons.Hackathons)#\cventry{ #(- .Date -)# }{ #(- .Name -)# }{ #(- .Role -)# }{ #(- .City -)# }{}{ #(- .Description -)# }
 #(end)##(end)#
 
-#(if .Talks)#\section{Talks}
-#(range .Talks)#\cventry{ #(- .Date -)# }{ #(- .Title -)# }{ #(- .Coautors -)# }{ #(- .Conference -)# }{}{ #(- .Description -)# }
+#(if .Talks)#\section{ #(- .Talks.Title -)#  }
+#(range .Talks.Talks)#\cventry{ #(- .Date -)# }{ #(- .Title -)# }{ #(- .Coautors -)# }{ #(- .Conference -)# }{}{ #(- .Description -)# }
 #(end)##(end)#
 
-#(if .Publications)#\section{Publications}
-#(range .Publications)#\cventry{ #(- .Date -)# }{ #(- .Title -)# }{ #(- .Coautors -)# }{ #(- .Context -)# }{}{ #(- .Description -)# }
+#(if .Publications)#\section{ #(- .Publications.Title -)#  }
+#(range .Publications.Publications)#\cventry{ #(- .Date -)# }{ #(- .Title -)# }{ #(- .Coautors -)# }{ #(- .Context -)# }{}{ #(- .Description -)# }
 #(end)##(end)#
 
-#(if .Computerskills)#\section{Computer skills}
-#(range .Computerskills)#\cvitem{ #(- .Group -)# }{ #(- .Skill -)# }
+#(if .Computerskills)#\section{ #(- .Computerskills.Title -)#  }
+#(range .Computerskills.Computerskills)#\cvitem{ #(- .Group -)# }{ #(- .Skill -)# }
 #(end)##(end)#
 
-#(if .Certificates )#\section{Certificates}
-#(range .Certificates )#\cvitem{ #(- .Type -)# }{ #(- .Name -)# }
+#(if .Certificates )#\section{ #(- .Certificates.Title -)# }
+#(range .Certificates.Certificates)#\cvitem{ #(- .Type -)# }{ #(- .Name -)# }
 #(end)##(end)#
 
-#(if .Languages)#\section{Languages}
-#(range .Languages)#\cvitem{ #(- .Language -)# }{ #(- .Level -)# }
+#(if .Languages)#\section{ #(- .Languages.Title -)#  }
+#(range .Languages.Languages)#\cvitem{ #(- .Language -)# }{ #(- .Level -)# }
 #(end)##(end)#
 
-#(if .Interests)#\section{Interests}
-#(range .Interests)#\cvitem{ #(- .Group -)# }{ #(- .Description -)# }
+#(if .Interests)#\section{ #(- .Interests.Title -)#  }
+#(range .Interests.Interests)#\cvitem{ #(- .Group -)# }{ #(- .Description -)# }
 #(end)##(end)#
 
 #(if .Freetext.End)#\section{Last but not least}
