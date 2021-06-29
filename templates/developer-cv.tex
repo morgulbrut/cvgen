@@ -20,8 +20,8 @@
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
-\documentclass[9pt]{developercv} % Default font size, values from 8-12pt are recommended
-
+\documentclass[10pt]{developercv} % Default font size, values from 8-12pt are recommended
+\usepackage{paralist}
 %----------------------------------------------------------------------------------------
 
 \begin{document}
@@ -35,31 +35,31 @@
 	
 	% If your name is very short, use just one of the lines below
 	% If your name is very long, reduce the font size or make the minipage wider and reduce the others proportionately
-	\colorbox{black}{{\HUGE\textcolor{white}{\textbf{\MakeUppercase{ #(.Personalinfo.Prename)# }}}}} % First name
+	\colorbox{black}{{\HUGE\textcolor{white}{\textbf{\MakeUppercase{ #(- .Personalinfo.Prename -)# }}}}} % First name
 	
-	\colorbox{black}{{\HUGE\textcolor{white}{\textbf{\MakeUppercase{ #(.Personalinfo.Name)# }}}}} % Last name
+	\colorbox{black}{{\HUGE\textcolor{white}{\textbf{\MakeUppercase{ #(- .Personalinfo.Name -)# }}}}} % Last name
 	
 	\vspace{6pt}
 	
-	{\huge {{- .Personalinfo.Title -}} } % Career or current job title
+	{\huge { #(- .Personalinfo.Title -)# } } % Career or current job title
 \end{minipage}
 \begin{minipage}[t]{0.275\textwidth} % 27.5% of the page width for the first row of icons
 	\vspace{-\baselineskip} % Required for vertically aligning minipages
 	
 	% The first parameter is the FontAwesome icon name, the second is the box size and the third is the text
 	% Other icons can be found by referring to fontawesome.pdf (supplied with the template) and using the word after \fa in the command for the icon you want
-	\icon{MapMarker}{12}{#(.Personalinfo.Address)#, #(.Personalinfo.Postcode)# #(.Personalinfo.City)#}\\
-	\icon{Phone}{12}{+1 123 456 789}\\
-	\icon{At}{12}{\href{mailto:alyx@vance.me}{alyx@vance.me}}\\	
+	\icon{MapMarker}{12}{#(- .Personalinfo.Address -)#, #(- .Personalinfo.Postcode -)# #(- .Personalinfo.City -)#}\\
+	#(if .Personalinfo.Phone)#\icon{Phone}{12}{#(- .Personalinfo.Phone -)#}\\#(end)#
+	#(if .Personalinfo.Email)#\icon{At}{12}{\href{mailto:#(.Personalinfo.Email)#}{#(.Personalinfo.Email)#}}\\#(end)#
 \end{minipage}
 \begin{minipage}[t]{0.275\textwidth} % 27.5% of the page width for the second row of icons
 	\vspace{-\baselineskip} % Required for vertically aligning minipages
 	
 	% The first parameter is the FontAwesome icon name, the second is the box size and the third is the text
 	% Other icons can be found by referring to fontawesome.pdf (supplied with the template) and using the word after \fa in the command for the icon you want
-	\icon{Globe}{12}{\href{https://alyx.vance.me}{alyx.vance.me}}\\
-	\icon{Github}{12}{\href{https://github.com/alyxvance}{github.com/alyxvance}}\\
-	\icon{Twitter}{12}{\href{https://twitter.com/@alyxvance}{@alyxvance}}\\
+	#(if .Personalinfo.Homepage)#\icon{Globe}{12}{\href{https://#(- .Personalinfo.Homepage -)#}{#(- .Personalinfo.Homepage -)#}}\\#(end)#
+	#(if .Personalinfo.Github)#\icon{Github}{12}{\href{https://github.com/#(- .Personalinfo.Github -)#}{github.com/#(- .Personalinfo.Github -)#}}\\#(end)#
+	#(if .Personalinfo.Twitter)#\icon{Twitter}{12}{\href{https://twitter.com/@#(- .Personalinfo.Twitter -)#}{@#(- .Personalinfo.Twitter -)#}}\\#(end)#
 \end{minipage}
 
 \vspace{0.5cm}
@@ -73,47 +73,37 @@
 \begin{minipage}[t]{0.4\textwidth} % 40% of the page width for the introduction text
 	\vspace{-\baselineskip} % Required for vertically aligning minipages
 	
-	\lorem \lorem \lorem \lorem \lorem\\ % Dummy text
+	#(if .Freetext.Begin)#
+		#(- .Freetext.Begin -)#
+	#(end)#
+
 \end{minipage}
 \hfill % Whitespace between
 \begin{minipage}[t]{0.5\textwidth} % 50% of the page for the skills bar chart
 	\vspace{-\baselineskip} % Required for vertically aligning minipages
 	\begin{barchart}{5.5}
-		\baritem{JavaScript}{60}
-		\baritem{PHP}{100}
-		\baritem{SASS/LESS}{70}
-		\baritem{Bootstrap}{70}
-		\baritem{Git}{40}
-		\baritem{LaTeX}{60}
+		#(range .Skills)#\baritem{ #(- .Name -)# }{ #(- .Level -)# }
+		#(end)#
 	\end{barchart}
 \end{minipage}
 
-\begin{center}
-	\bubbles{5/Eclipse, 6/git, 4/Office, 3/Inkscape, 3/Blender}
-\end{center}
+% \begin{center}
+% 	\bubbles{5/Eclipse, 6/git, 4/Office, 3/Inkscape, 3/Blender}
+% \end{center}
 
 %----------------------------------------------------------------------------------------
 %	EXPERIENCE
 %----------------------------------------------------------------------------------------
 
 \cvsect{Experience}
-
 \begin{entrylist}
-	\entry
-		{2017 -- 3/2018}
-		{Front-end developer}
-		{Big Corporation Name Inc.}
-		{\lorem \lorem \lorem\\ \texttt{node.js}\slashsep\texttt{Vue.js}\slashsep\texttt{Electron}}
-	\entry
-		{2015 -- 2018\\\footnotesize{part time}}
-		{Full stack developer}
-		{Famous Eshop Inc.}
-		{\lorem\lorem\\ \texttt{PHP}\slashsep\texttt{JS}\slashsep\texttt{MariaDB}\slashsep\texttt{Linux}}
-	\entry
-		{2013 -- 2014\\\footnotesize{part time}}
-		{Junior PHP Developer}
-		{example.com}
-		{\lorem\lorem\\ \texttt{PHP}\slashsep\texttt{Laravel}}
+	#(range .Experience)#\entry{ #(- .Date -)# }{ #(- .Role -)# }{ #(- .Company -)# / #(- .City -)# }
+	{ #(- .Description)# 
+	#(if .Tasks)#\begin{compactitem}
+		#(range .Tasks)# \item #(.)#
+		#(end)#\end{compactitem}
+	#(end)# }
+#(end)#
 \end{entrylist}
 
 %----------------------------------------------------------------------------------------
@@ -121,23 +111,10 @@
 %----------------------------------------------------------------------------------------
 
 \cvsect{Education}
-
 \begin{entrylist}
-	\entry
-		{2013 -- 2017}
-		{Master's Degree}
-		{Another University Name}
-		{\lorem\lorem\lorem}
-	\entry
-		{2014}
-		{Postgraduate Diploma}
-		{A University Name}
-		{\lorem\lorem}
-	\entry
-		{2007 -- 2013}
-		{Bachelor's Degree}
-		{A University Name}
-		{\lorem\lorem}
+	#(range .Education)#\entry{ #(- .Date -)# }{ #(- .Subject -)# }{ #(- .School -)# / #(- .City -)# }
+	{ #(- .Description -)# }
+#(end)#
 \end{entrylist}
 
 %----------------------------------------------------------------------------------------
@@ -148,26 +125,23 @@
 	\vspace{-\baselineskip} % Required for vertically aligning minipages
 
 	\cvsect{Languages}
-	
-	\textbf{English} - native\\
-	\textbf{German} - proficient\\
-	\textbf{Polish} - rudimentary
+	#(range .Languages)#\textbf{ #(- .Language -)# :} #(.Level)# \\
+	#(end)#
 \end{minipage}
 \hfill
 \begin{minipage}[t]{0.3\textwidth}
 	\vspace{-\baselineskip} % Required for vertically aligning minipages
 	
 	\cvsect{Hobbies}
-	
-	I love... \lorem
+	#(- .Hobbies -)#
 \end{minipage}
 \hfill
 \begin{minipage}[t]{0.3\textwidth}
 	\vspace{-\baselineskip} % Required for vertically aligning minipages
 	
 	\cvsect{Non profit}
+	#(- .Nonprofit -)#
 	
-	I help... \lorem
 \end{minipage}
 
 %----------------------------------------------------------------------------------------
