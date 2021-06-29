@@ -5,3 +5,5 @@
 */__latexindent_temp.tex
 output/*
 input/tillo1.yaml
+input/tillode.yaml
+*.exe
