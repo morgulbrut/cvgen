@@ -46,7 +46,7 @@
   \date{ #(- .Letter.Date -)# }
   \opening{ #(- .Letter.Opening -)# }
   \closing{ #(- .Letter.Closing -)# }
-  \enclosure[Attached]{CV, certificates}          %use an optional argument to use a string other than "Enclosure", or redefine \enclname
+  %\enclosure[Attached]{CV, certificates}          %use an optional argument to use a string other than "Enclosure", or redefine \enclname
   \makelettertitle
   #(range .Letter.Text)#
     #(.)#
@@ -61,15 +61,15 @@
 
 \makecvtitle
 
-#(if .Freetext.Begin)#\section{About me}
+#(if .Freetext.Begin)#\section{ #(- .Freetext.Begintitle -)# }
 \cvitem{}{ #(- .Freetext.Begin -)# }
 #(end)#
 
-#(if .Testimonials)#\section{Others about me}
-#(range .Testimonials)#\cvitem{ #(- .Name -)# }{ #(- .Quote -)# }
+#(if .Testimonials.Title)#\section{ #(- .Testimonials.Title -)# }
+#(range .Testimonials.Testimonials)#\cvitem{ #(- .Name -)# }{ #(- .Quote -)# }
 #(end)##(end)#
 
-#(if .Experience)#\section{ #(- .Experience.Title -)#  }
+#(if .Experience.Title)#\section{ #(- .Experience.Title -)#  }
 #(range .Experience.Jobs)#\cventry{ #(- .Date -)# }{ #(- .Role -)# }{ #(- .Company -)# }{ #(- .City -)# }{}
 { #(- .Description)# 
   #(if .Tasks)#\begin{itemize}
@@ -78,11 +78,11 @@
   #(end -)# }
 #(end)##(end)#
 
-#(if .Education)#\section{ #(- .Education.Title -)#  }
+#(if .Education.Title)#\section{ #(- .Education.Title -)#  }
 #(range .Education.Schools)#\cventry{ #(- .Date -)# }{ #(- .Subject -)# }{ #(- .School -)# }{ #(- .City -)# }{}{ #(- .Description -)# }
 #(end)##(end)#
 
-#(if .Projects)#\section{ #(- .Education.Title -)# }
+#(if .Projects.Title)#\section{ #(- .Projects.Title -)# }
 #(range .Projects.Projects)#\cventry{ #(- .Date -)# }{ #(- .Title -)# }{ #(- .Context -)# }{ #(- .City -)# }{}
 { #(- .Description)# 
   #(if .Tasks)#\begin{itemize}
@@ -91,35 +91,35 @@
   #(end -)# }
 #(end)##(end)#
 
-#(if .Hackathons)#\section{ #(- .Hackathons.Title -)# }
+#(if .Hackathons.Title)#\section{ #(- .Hackathons.Title -)# }
 #(range .Hackathons.Hackathons)#\cventry{ #(- .Date -)# }{ #(- .Name -)# }{ #(- .Role -)# }{ #(- .City -)# }{}{ #(- .Description -)# }
 #(end)##(end)#
 
-#(if .Talks)#\section{ #(- .Talks.Title -)#  }
+#(if .Talks.Title)#\section{ #(- .Talks.Title -)#  }
 #(range .Talks.Talks)#\cventry{ #(- .Date -)# }{ #(- .Title -)# }{ #(- .Coautors -)# }{ #(- .Conference -)# }{}{ #(- .Description -)# }
 #(end)##(end)#
 
-#(if .Publications)#\section{ #(- .Publications.Title -)#  }
+#(if .Publications.Title)#\section{ #(- .Publications.Title -)#  }
 #(range .Publications.Publications)#\cventry{ #(- .Date -)# }{ #(- .Title -)# }{ #(- .Coautors -)# }{ #(- .Context -)# }{}{ #(- .Description -)# }
 #(end)##(end)#
 
-#(if .Computerskills)#\section{ #(- .Computerskills.Title -)#  }
+#(if .Computerskills.Title)#\section{ #(- .Computerskills.Title -)#  }
 #(range .Computerskills.Computerskills)#\cvitem{ #(- .Group -)# }{ #(- .Skill -)# }
 #(end)##(end)#
 
-#(if .Certificates )#\section{ #(- .Certificates.Title -)# }
+#(if .Certificates.Title)#\section{ #(- .Certificates.Title -)# }
 #(range .Certificates.Certificates)#\cvitem{ #(- .Type -)# }{ #(- .Name -)# }
 #(end)##(end)#
 
-#(if .Languages)#\section{ #(- .Languages.Title -)#  }
+#(if .Languages.Title)#\section{ #(- .Languages.Title -)#  }
 #(range .Languages.Languages)#\cvitem{ #(- .Language -)# }{ #(- .Level -)# }
 #(end)##(end)#
 
-#(if .Interests)#\section{ #(- .Interests.Title -)#  }
+#(if .Interests.Title)#\section{ #(- .Interests.Title -)#  }
 #(range .Interests.Interests)#\cvitem{ #(- .Group -)# }{ #(- .Description -)# }
 #(end)##(end)#
 
-#(if .Freetext.End)#\section{Last but not least}
+#(if .Freetext.End)#\section{#(- .Freetext.Endtitle -)#}
 \cvitem{}{ #(- .Freetext.End -)# }
 #(end)#
 
