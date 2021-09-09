@@ -29,8 +29,10 @@ type CV struct {
 		Title    string      `yaml:"title"`
 	} `yaml:"personalinfo"`
 	Freetext struct {
-		Begin string `yaml:"begin"`
-		End   string `yaml:"end"`
+		Begin      string `yaml:"begin"`
+		Begintitle string `yaml:"begintitle"`
+		End        string `yaml:"end"`
+		Endtitle   string `yaml:"endtitle"`
 	} `yaml:"freetext"`
 	Testimonials struct {
 		Title        string `yaml:"title"`
