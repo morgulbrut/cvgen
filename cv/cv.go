@@ -32,9 +32,12 @@ type CV struct {
 		Begin string `yaml:"begin"`
 		End   string `yaml:"end"`
 	} `yaml:"freetext"`
-	Testimonials []struct {
-		Name  string `yaml:"name"`
-		Quote string `yaml:"quote"`
+	Testimonials struct {
+		Title        string `yaml:"title"`
+		Testimonials []struct {
+			Name  string `yaml:"name"`
+			Quote string `yaml:"quote"`
+		} `yaml:"testimonials"`
 	} `yaml:"testimonials"`
 	Experience struct {
 		Title string `yaml:"title"`
