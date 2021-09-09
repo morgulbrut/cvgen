@@ -10,11 +10,11 @@ import (
 
 	"github.com/morgulbrut/color256"
 	"github.com/morgulbrut/cvgen/cv"
+
+	"github.com/pdfcpu/pdfcpu/pkg/api"
 )
 
-func output(data, templ, out string) {
-	var d cv.CV
-	d.Read(data)
+func output(data, templ, out string, d cv.CV) {
 
 	os.Remove(out)
 	color256.PrintHiCyan("Rendering output(%s, %s, %s)", data, templ, out)
@@ -54,12 +54,12 @@ func logo() {
 }
 
 func compPDF(cmd string, file string) {
-	c := exec.Command(cmd, "--interaction=nonstopmode", file)
-	st, err := c.Output()
+	color256.PrintHiCyan("Compiling %s using %s", file, cmd)
+
+	_, err := exec.Command(cmd, "--interaction=nonstopmode", file).Output()
 	if err != nil {
-		log.Fatal("compiling PDF: ", err)
+		color256.PrintHiOrange("Compiling PDF: %s", err)
 	}
-	color256.PrintHiRed(string(st))
 }
 
 func cleanup() {
@@ -71,42 +71,58 @@ func cleanup() {
 func remFile(path string) {
 	err := os.Remove(path)
 	if err != nil {
-		color256.PrintHiRed("Removing file: ", err)
-		return
+		color256.PrintHiOrange("Removing file: %s", err)
+	}
+}
+
+func appendAttachments(cv string, atts []string, outfile string) {
+	inFiles := []string{cv}
+	inFiles = append(inFiles, atts...)
+	color256.PrintHiCyan("Merging %q to %s", inFiles, outfile)
+	err := api.MergeCreateFile(inFiles, outfile, nil)
+	if err != nil {
+		color256.PrintHiOrange("Merging PDF: %s", err)
 	}
 }
 
 func main() {
 	logo()
+
 	var templ, data, out string
-	var letter, pdfl, xel bool
+	var letter, pdfl, xel, att bool
 	var ltempl, ldata string
 	flag.StringVar(&templ, "t", "templates/moderncv.tex", "Path to cv template")
-	flag.StringVar(&data, "i", "input/cv.yaml", "Path to cv data yaml file")
-	flag.StringVar(&out, "o", "output/cv.tex", "Path to output file")
-	flag.BoolVar(&pdfl, "P", false, "Genderate a pdf using pdflatex")
-	flag.BoolVar(&xel, "X", false, "Genderate a pdf using xelatex")
+	flag.StringVar(&data, "i", "./input/cv.yaml", "Path to cv data yaml file")
+	flag.StringVar(&out, "o", "./output/cv.tex", "Path to output file")
+	flag.BoolVar(&pdfl, "P", false, "Generate a pdf using pdflatex")
+	flag.BoolVar(&xel, "X", false, "Generate a pdf using xelatex")
+	flag.BoolVar(&att, "A", false, "Attach documents to the cv (only works with -P or -X")
 
 	flag.Parse()
 
-	err := os.Setenv("TEXINPUTS", "templates")
+	var d cv.CV
+	d.Read(data)
+
+	err := os.Setenv("TEXINPUTS", "./templates:")
 	if err != nil {
 		log.Fatalf("err %v", err)
 	}
 
 	if letter {
-		output(ldata, ltempl, "output/letter.tex")
+		output(ldata, ltempl, "./output/letter.tex", d)
 	}
-	output(data, templ, out)
+	output(data, templ, out, d)
 
 	if pdfl {
-		color256.PrintHiCyan("Compiling %s using pdflatex", out)
 		compPDF("pdflatex", out)
 		cleanup()
 	}
 	if xel {
-		color256.PrintHiCyan("Compiling %s using xelatex", out)
 		compPDF("xelatex", out)
 		cleanup()
+	}
+
+	if att {
+		appendAttachments("cv.pdf", d.Settings.Attachments, d.Settings.Outfilename)
 	}
 }

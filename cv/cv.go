@@ -138,11 +138,13 @@ type CV struct {
 	Hobbies   string `yaml:"hobbies"`
 	Nonprofit string `yaml:"nonprofit"`
 	Settings  struct {
-		Date     string      `yaml:"date"`
-		Cvstyle  string      `yaml:"cvstyle"`
-		Cvcolor  string      `yaml:"cvcolor"`
-		Mainfont interface{} `yaml:"mainfont"`
-		Sansfont interface{} `yaml:"sansfont"`
+		Date        string      `yaml:"date"`
+		Cvstyle     string      `yaml:"cvstyle"`
+		Cvcolor     string      `yaml:"cvcolor"`
+		Mainfont    interface{} `yaml:"mainfont"`
+		Sansfont    interface{} `yaml:"sansfont"`
+		Outfilename string      `yaml:"outfilename"`
+		Attachments []string    `yaml:"attachments"`
 	} `yaml:"settings"`
 	Recipient struct {
 		Name     string      `yaml:"name"`
