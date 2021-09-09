@@ -2,9 +2,15 @@
 *.log
 *.out
 *.pdf
+*.exe
 */__latexindent_temp.tex
 output/*
 input/tillo1.yaml
 input/tillode.yaml
-*.exe
 input/tillo_simple.yaml
+input/tillo_full_de.yaml
+input/tillo_full.yaml
+input/tillo_simple_de.yaml
+input/tillo_simple_eda_de.yaml
+input/tillo_simple_eda.yaml
+.vscode/launch.json
