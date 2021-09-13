@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 	"text/template"
 
 	"github.com/morgulbrut/color256"
@@ -123,6 +124,8 @@ func main() {
 	}
 
 	if att {
-		appendAttachments("cv.pdf", d.Settings.Attachments, d.Settings.Outfilename)
+		tn := filepath.Base(data)
+		outname := strings.Split(tn, ".")[0] + ".pdf"
+		appendAttachments("cv.pdf", d.Settings.Attachments, outname)
 	}
 }

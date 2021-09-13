@@ -165,4 +165,3 @@ settings:
   sansfont:
   attachments:
     - attachments/example.pdf
-  outfilename: joe doe.pdf

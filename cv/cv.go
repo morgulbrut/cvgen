@@ -143,7 +143,6 @@ type CV struct {
 		Cvcolor     string      `yaml:"cvcolor"`
 		Mainfont    interface{} `yaml:"mainfont"`
 		Sansfont    interface{} `yaml:"sansfont"`
-		Outfilename string      `yaml:"outfilename"`
 		Attachments []string    `yaml:"attachments"`
 	} `yaml:"settings"`
 	Recipient struct {
