@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
@@ -86,32 +87,8 @@ func appendAttachments(cv string, atts []string, outfile string) {
 	}
 }
 
-func main() {
-	logo()
+func generateDocument(templ, data, out string, pdfl, xel, att bool, d cv.CV) {
 
-	var templ, data, out string
-	var letter, pdfl, xel, att bool
-	var ltempl, ldata string
-	flag.StringVar(&templ, "t", "templates/moderncv.tex", "Path to cv template")
-	flag.StringVar(&data, "i", "./input/cv.yaml", "Path to cv data yaml file")
-	flag.StringVar(&out, "o", "./output/cv.tex", "Path to output file")
-	flag.BoolVar(&pdfl, "P", false, "Generate a pdf using pdflatex")
-	flag.BoolVar(&xel, "X", false, "Generate a pdf using xelatex")
-	flag.BoolVar(&att, "A", false, "Attach documents to the cv (only works with -P or -X")
-
-	flag.Parse()
-
-	var d cv.CV
-	d.Read(data)
-
-	err := os.Setenv("TEXINPUTS", "./templates:")
-	if err != nil {
-		log.Fatalf("err %v", err)
-	}
-
-	if letter {
-		output(ldata, ltempl, "./output/letter.tex", d)
-	}
 	output(data, templ, out, d)
 
 	if pdfl {
@@ -128,4 +105,62 @@ func main() {
 		outname := strings.Split(tn, ".")[0] + ".pdf"
 		appendAttachments("cv.pdf", d.Settings.Attachments, outname)
 	}
+}
+
+func main() {
+	logo()
+
+	var templ, data, out string
+	var pdfl, xel, att, all bool
+	flag.StringVar(&templ, "t", "templates/moderncv.tex", "Path to cv template")
+	flag.StringVar(&data, "i", "input/cv.yaml", "Path to cv data yaml file")
+	flag.StringVar(&out, "o", "output/cv.tex", "Path to output file")
+	flag.BoolVar(&pdfl, "P", false, "Generate a pdf using pdflatex")
+	flag.BoolVar(&xel, "X", false, "Generate a pdf using xelatex")
+	flag.BoolVar(&att, "A", false, "Attach documents to the cv (only works with -P or -X")
+	flag.BoolVar(&all, "ba", false, "Build all input files with all outputfiles")
+
+	flag.Parse()
+
+	var d cv.CV
+	d.Read(data)
+
+	err := os.Setenv("TEXINPUTS", "classfiles:")
+	if err != nil {
+		log.Fatalf("err %v", err)
+	}
+
+	if all {
+		pdfl = true
+
+		ts, err := ioutil.ReadDir("templates")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		is, err := ioutil.ReadDir("input")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		for _, i := range is {
+			for _, t := range ts {
+				var d cv.CV
+				d.Read("input/" + i.Name())
+				generateDocument("templates/"+t.Name(), "input/"+i.Name(), out, true, false, false, d)
+
+				outname := d.Personalinfo.Prename + "_" + d.Personalinfo.Name + ".pdf"
+				path := "pdf/" + strings.Split(filepath.Base(i.Name()), ".")[0] + "/" + strings.Split(filepath.Base(t.Name()), ".")[0]
+				err := os.MkdirAll(path, os.ModePerm)
+				if err != nil {
+					color256.PrintHiOrange("Mkdir: %s", err)
+				}
+				appendAttachments("cv.pdf", d.Settings.Attachments, path+"/"+outname)
+			}
+		}
+		remFile("cv.pdf")
+	} else {
+		generateDocument(templ, data, out, pdfl, xel, att, d)
+	}
+
 }
