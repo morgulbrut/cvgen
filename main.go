@@ -64,10 +64,16 @@ func compPDF(cmd string, file string) {
 	}
 }
 
-func cleanup() {
-	remFile("cv.aux")
-	remFile("cv.log")
-	remFile("cv.out")
+func filename(path string) string {
+	fn := filepath.Base(path)
+	return strings.TrimSuffix(fn, filepath.Ext(fn))
+}
+
+func cleanup(out string) {
+	fn := filename(out)
+	remFile(fn + ".aux")
+	remFile(fn + ".log")
+	remFile(fn + ".out")
 }
 
 func remFile(path string) {
@@ -93,11 +99,11 @@ func generateDocument(templ, data, out string, pdfl, xel, att bool, d cv.CV) {
 
 	if pdfl {
 		compPDF("pdflatex", out)
-		cleanup()
+		cleanup(out)
 	}
 	if xel {
 		compPDF("xelatex", out)
-		cleanup()
+		cleanup(out)
 	}
 
 	if att {
