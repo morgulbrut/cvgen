@@ -8,3 +8,4 @@ output/*
 input/tillo*.yaml
 .vscode/launch.json
 imgs/*.jpg
+input/letter*.yaml
